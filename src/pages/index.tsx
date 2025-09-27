@@ -1,27 +1,37 @@
 import { Link } from 'waku';
-
+import { use, Suspense } from 'react';
+import { getAllPosts } from '../lib/actions/posts';
 export default async function HomePage() {
-  const data = await getData();
+  const {title, headline, posts }= await getData();
+  const postList = posts.map((post) => (
+    <div key={post.slug} className="bg-gray-300 p-4 rounded-lg shadow-md hover:shadow-lg w-full mb-4">
+        <Link to={`/posts/${post.slug}`} className="text-blue-600 hover:underline">
+          {post.title}
+        </Link>
+        <div className="text-gray-600">
+          {post.description}
+          <span className="text-gray-600 text-sm">
+            Create at: {new Date(post.createdAt).toLocaleDateString()}
+          </span>
+        </div>
+    </div>
+  ));
 
   return (
-    <div>
-      <title>{data.title}</title>
-      <h1 className="text-4xl font-bold tracking-tight">{data.headline}</h1>
-      <p>{data.body}</p>
-      <Link to="/about" className="mt-4 inline-block underline">
-        About page
-      </Link>
+    <div className="flex flex-col items-start min-h-screen w-full bg-gray-100 p-6">
+
+        
+      <Suspense fallback={<div>Loading...</div>}>
+        {postList}
+      </Suspense>
     </div>
   );
 }
 
 const getData = async () => {
   const data = {
-    title: 'Waku',
-    headline: 'Waku',
-    body: 'Hello world!',
+    posts: await getAllPosts(),
   };
-
   return data;
 };
 
