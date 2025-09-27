@@ -16,6 +16,7 @@ import type { getConfig as File_PostsSlug_getConfig } from './pages/posts/[slug]
 type Page =
 | ({ path: '/404' } & GetConfigResponse<typeof File_404_getConfig>)
 | ({ path: '/about' } & GetConfigResponse<typeof File_About_getConfig>)
+| { path: '/blog'; render: 'dynamic' }
 | ({ path: '/' } & GetConfigResponse<typeof File_Index_getConfig>)
 | ({ path: '/posts/[slug]' } & GetConfigResponse<typeof File_PostsSlug_getConfig>);
 

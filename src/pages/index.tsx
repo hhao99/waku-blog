@@ -1,6 +1,6 @@
 import { Link } from 'waku';
 import { use, Suspense } from 'react';
-import { getAllPosts } from '../lib/actions/posts';
+import { getAllPosts } from '../lib/actions/posts.db';
 export default async function HomePage() {
   const { posts }= await getData();
   const postList = posts.map((post) => (

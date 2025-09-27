@@ -1,6 +1,6 @@
 import { Link } from 'waku';
 import { PageProps } from 'waku/router';
-import { getPostBySlug } from '../../lib/actions/posts';
+import { getPostBySlug } from '../../lib/actions/posts.db';
 export default async function PostPage({ slug, }: PageProps<'/posts/[slug]'>) {
   const { post } = await getData(slug);
 
