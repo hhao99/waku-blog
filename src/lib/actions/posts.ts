@@ -7,8 +7,8 @@ export async function getAllPosts(): Promise<Post[]> {
     return await db.select().from(postsTable);
 }
 
-export async function getPostById(id: number): Promise<Post | undefined> {
-    return await db.select().from(postsTable).where(postsTable.id.eq(id)).limit(1).then(res => res[0]);
+export async function getPostBySlug(slug: String): Promise<Post | undefined> {
+    return db.select().from(postsTable).where(eq(postsTable.slug, slug)).limit(1);  
 }
 
 export async function createPost(newPost: NewPost): Promise<Post> {

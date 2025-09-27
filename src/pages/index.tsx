@@ -2,7 +2,7 @@ import { Link } from 'waku';
 import { use, Suspense } from 'react';
 import { getAllPosts } from '../lib/actions/posts';
 export default async function HomePage() {
-  const {title, headline, posts }= await getData();
+  const { posts }= await getData();
   const postList = posts.map((post) => (
     <div key={post.slug} className="bg-gray-300 p-4 rounded-lg shadow-md hover:shadow-lg w-full mb-4">
         <Link to={`/posts/${post.slug}`} className="text-blue-600 hover:underline">
