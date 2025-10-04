@@ -15,7 +15,6 @@ export async function getPostById(id: Number): Promise<Post | undefined> {
 
 export async function createPost(newPost: NewPost): Promise<Post> {
     const [insertedPost] = await db.insert(postsTable).values(newPost).returning();
-    console.log('Inserted Post:', insertedPost);
     return unstable_redirect('/');
 }
 
