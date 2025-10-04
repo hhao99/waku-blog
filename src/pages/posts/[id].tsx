@@ -1,6 +1,6 @@
 import { Link } from 'waku';
 import { PageProps } from 'waku/router';
-import Markdown from 'react-markdown';
+import Post from '@/components/posts/post'
 
 import { getPostById } from '@/lib/actions/posts.db';
 
@@ -13,13 +13,7 @@ export default async function PostPage({ id, }: PageProps<'/posts/[id]'>) {
 
   return (
     <div className="flex flex-col items-start min-h-screen w-full bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold tracking-tight border-b border-gray-300">{post.title}</h1>
-      <div>
-        <Markdown>{post.content}</Markdown>
-      </div>
-      <Link to="/" className="mt-4 inline-block underline">
-        Return home
-      </Link>
+      <Post post={post} />
     </div>
   );
 }

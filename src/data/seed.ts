@@ -4,17 +4,15 @@ import { postsTable } from './schemas/posts';
 const posts = [
   {
     title: 'First Post',
-    slug: 'first-post',
     description: 'the first post.',
-    content: 'This is the body of the first post.',
+    content: '# This is the body of the first post.\n * this is first item.\n * this is the second item\nThis is the normal item',
     createdAt: Date.now(),
     updatedAt: Date.now(),
   },
   {
-    slug: 'second-post',
     description: 'the second post.',
     title: 'Second Post',
-    content: 'This is the body of the second post.',
+    content: '# This is the body of the first post.\n * this is first item.\n * this is the second item\nThis is the normal item',
     createdAt: Date.now(),
     updatedAt: Date.now(),
   },

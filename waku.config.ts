@@ -1,6 +1,5 @@
 import { defineConfig } from 'waku/config';
 import tailwindcss from '@tailwindcss/vite';
-
 //@ts-ignore
 import path from 'path';
 
@@ -9,7 +8,8 @@ const root = path.resolve('.','./src')
 
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss()],
     resolve: {
       alias: {
         "@": root
