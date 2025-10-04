@@ -1,5 +1,5 @@
 import db from '../lib/db';
-import { postsTable } from './schema/posts';
+import { postsTable } from './schemas/posts';
 
 const posts = [
   {

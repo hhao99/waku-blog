@@ -1,18 +1,18 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "80a6b978-ff55-4e59-b9ad-1e8149829e3f",
+  "id": "85be1375-c7da-4e37-bf3a-96134097762e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "posts": {
       "name": "posts",
       "columns": {
-        "slug": {
-          "name": "slug",
-          "type": "text",
+        "id": {
+          "name": "id",
+          "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         },
         "title": {
           "name": "title",

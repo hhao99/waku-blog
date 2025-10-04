@@ -10,7 +10,7 @@ import type { getConfig as File_About_getConfig } from './pages/about';
 // prettier-ignore
 import type { getConfig as File_Index_getConfig } from './pages/index';
 // prettier-ignore
-import type { getConfig as File_PostsSlug_getConfig } from './pages/posts/[slug]';
+import type { getConfig as File_PostsId_getConfig } from './pages/posts/[id]';
 
 // prettier-ignore
 type Page =
@@ -18,7 +18,7 @@ type Page =
 | ({ path: '/about' } & GetConfigResponse<typeof File_About_getConfig>)
 | { path: '/blog'; render: 'dynamic' }
 | ({ path: '/' } & GetConfigResponse<typeof File_Index_getConfig>)
-| ({ path: '/posts/[slug]' } & GetConfigResponse<typeof File_PostsSlug_getConfig>);
+| ({ path: '/posts/[id]' } & GetConfigResponse<typeof File_PostsId_getConfig>);
 
 // prettier-ignore
 declare module 'waku/router' {

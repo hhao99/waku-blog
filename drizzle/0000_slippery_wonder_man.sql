@@ -1,5 +1,5 @@
 CREATE TABLE `posts` (
-	`slug` text PRIMARY KEY NOT NULL,
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`title` text NOT NULL,
 	`description` text,
 	`content` text NOT NULL,
