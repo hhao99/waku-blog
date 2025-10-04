@@ -1,4 +1,5 @@
 'use server';
+import { unstable_redirect } from 'waku/router/server';
 import db from '../db';
 import { postsTable } from '../../data/schemas/posts';
 import type { NewPost, Post } from '../../data/schemas/posts';
@@ -15,7 +16,7 @@ export async function getPostById(id: Number): Promise<Post | undefined> {
 export async function createPost(newPost: NewPost): Promise<Post> {
     const [insertedPost] = await db.insert(postsTable).values(newPost).returning();
     console.log('Inserted Post:', insertedPost);
-    return insertedPost;
+    return unstable_redirect('/');
 }
 
 export async function updatePost(id: number, updatedFields: Partial<NewPost>): Promise<Post | undefined> {
