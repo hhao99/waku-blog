@@ -1,8 +1,9 @@
 'use client';
-import { useActionState } from "react";
+import { useState,useActionState } from "react";
 import { createPostAction } from "../../lib/actions/posts";
+import Editor from '@/components/posts/markdown-editor';
 const  NewPostPage = () => {
-  
+  const [content,setContent]=useState('# this is the title\n and this is the content')
 
   const [state, formAction, isPending] = useActionState(createPostAction,null);
   return (
@@ -39,13 +40,8 @@ const  NewPostPage = () => {
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
             Content
           </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-40"
-            id="content"
-            name='content'
-          >
-            {`# New Post Title'n\nThis is the content of the new post.`}
-          </textarea>
+          <input type='hidden' value={content} name='content' />
+          <Editor content={content} onChange={setContent}/>
         </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

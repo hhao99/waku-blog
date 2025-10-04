@@ -12,6 +12,10 @@
   },
   "dependencies": {
     "@libsql/client": "^0.15.15",
+    "@tiptap/extension-document": "^3.6.5",
+    "@tiptap/extension-paragraph": "^3.6.5",
+    "@tiptap/extension-text": "^3.6.5",
+    "@tiptap/react": "^3.6.5",
     "@types/node": "^24.5.2",
     "drizzle-orm": "^0.44.5",
     "react": "19.1.1",
