@@ -13,7 +13,7 @@
                 packages = with pkgs; [
                     nodejs_22
                     pnpm
-                    bun 
+                    bun
                     nodePackages.typescript
                     nodePackages.typescript-language-server
                 ];
