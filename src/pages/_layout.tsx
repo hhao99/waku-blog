@@ -11,11 +11,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const data = await getData();
 
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col h-4/5 w-full">
       <meta name="description" content={data.description} />
       <link rel="icon" type="image/png" href={data.icon} />
       <Header />
-      <main className="m-6 flex *:min-h-64 *:min-w-64 lg:m-0 lg:min-h-svh lg:justify-center">
+      <main className="m-6 flex z-100">
         {children}
       </main>
       <Footer />

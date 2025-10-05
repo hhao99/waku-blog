@@ -23,8 +23,10 @@ const createOrUpdatePostAction = async (preState, formData: FormData) => {
   return unstable_redirect('/')
 }
 
-const deletePostAction = async(id: number) => {
-  await deletePost(id);
+const deletePostAction = async(preState,formData:FormData) => {
+  const id = parseInt(formData.get('id') as string);
+  console.log('delete with id:',id)
+  if(id) await deletePost(id);
   return unstable_redirect('/')
 
 }

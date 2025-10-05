@@ -6,7 +6,7 @@ export default function Editor({value,setValue}: {value: string, setValue: (valu
         <>
         <Suspense fallback={<h3>loading...</h3>}>
             <div className='container'>
-                <MDEditor value={value} onChange={setValue} /> 
+                <MDEditor value={value} onChange={setValue}/> 
             </div>
         </Suspense>   
         </>

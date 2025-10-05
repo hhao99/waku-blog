@@ -25,5 +25,5 @@ export async function updatePost(id: number, updatedFields: Partial<NewPost>): P
 }
 
 export async function deletePost(id: number): Promise<void> {
-    await db.delete(postsTable).where(postsTable.id.eq(id));
+    await db.delete(postsTable).where(eq(postsTable.id,id));
 }       

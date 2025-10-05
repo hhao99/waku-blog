@@ -8,8 +8,9 @@ export default function Post({post}: {post: Post}) {
             <div className='prose'>
                 <Markdown>{post.content}</Markdown>
             </div>   
-            
-            <Link to={`/`}>Return to home</Link>
+            <div className='flex w-full justify-end space-x-4'>
+                <Link to={`/admin/edit/${post.id}`}>Edit</Link>
+            </div>
         </div>
     )
 }
