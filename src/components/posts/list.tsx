@@ -7,7 +7,7 @@ export default function PostList({posts}: {posts: Post[]}) {
     return (
         <div className='flex flex-col w-full m-4'>
             <ul>
-                {!posts? <h3>no post yet!</h3>: postList}  
+                {posts && posts.length > 0 ? postList :<h3>no post yet!</h3>}  
             </ul> 
         </div>
     )

@@ -12,13 +12,11 @@ const createOrUpdatePostAction = async (preState, formData: FormData) => {
   const mode = formData.get('mode') as string
   if( mode === 'new') {
     const post = { title,  description, content, createdAt: Date.now(), updatedAt: Date.now() };
-    console.log('creating post: ', post)
     await createPost(post);
   }
   else {
     const post = { id, title, description, content, createdAt, updatedAt: Date.now() }
     await updatePost(id,post);
-    console.log('updated the blog id: ', id)
   }
   return unstable_redirect('/')
 }
