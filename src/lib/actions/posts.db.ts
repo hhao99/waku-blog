@@ -1,21 +1,24 @@
 'use server';
 import db from '../db';
+import { eq,desc} from 'drizzle-orm';
+import { unstable_notFound, unstable_redirect } from 'waku/router/server';
+
 import { postsTable } from '../../data/schemas/posts';
 import type { NewPost, Post } from '../../data/schemas/posts';
-import { eq,desc} from 'drizzle-orm';
+
 
 export async function getAllPosts(): Promise<Post[]> {
     return await db.select().from(postsTable);
 }
 
 export async function getPostById(id: Number): Promise<Post | undefined> {
-    return db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);  
+    const post = db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);  
+    return post;
 }
 
 export async function createPost(newPost: NewPost): Promise<Post> {
     const [insertedPost] = await db.insert(postsTable).values(newPost).returning();
-    console.log('Inserted Post:', insertedPost);
-    return insertedPost;
+    return unstable_redirect('/')
 }
 
 export async function updatePost(id: number, updatedFields: Partial<NewPost>): Promise<Post | undefined> {

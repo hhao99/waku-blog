@@ -13,6 +13,7 @@
   "dependencies": {
     "@libsql/client": "^0.15.15",
     "@types/node": "^24.5.2",
+    "@uiw/react-md-editor": "^4.0.8",
     "drizzle-orm": "^0.44.5",
     "react": "19.1.1",
     "react-dom": "19.1.1",

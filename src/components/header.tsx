@@ -6,7 +6,10 @@ export const Header = () => {
       <h1 className="text-xl font-bold tracking-tight">
         <Link to="/">Waku Blog</Link>
       </h1>
-      <nav>
+      <nav className='space-x-4'>
+        <Link to="/admin" className="underline">
+          Admin
+        </Link>
         <Link to="/about" className="underline">
           About
         </Link>
