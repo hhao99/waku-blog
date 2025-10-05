@@ -1,24 +1,26 @@
 'use client';
-import { useState, useActionState } from 'react'
+import { lazy, Suspense, useState, useActionState, } from 'react'
 import { createOrUpdatePostAction } from "@/lib/actions/posts";
-import type { Post } from 'src/data/schemas/posts';
-import Editor from "@/components/posts/editor";
+import type { Post } from '@/data/schemas/posts';
+import Markdown from 'react-markdown'
+const MDEditor = lazy(()=> import('@uiw/react-md-editor'))
 
 export default function PostForm({post}: {post: Post}) {
     
 
 
-      const [content,setContent] = useState(post? post.content : '');
+      const [value,setValue] = useState(post? post.content : "");
       const [state, formAction, isPending] = useActionState(createOrUpdatePostAction,null);
       
     return (
+      <Suspense fallback={<h3>loading form...</h3>}>
         <div className='container'>
           <form  action={formAction}>
             <div className='flex justify-between mx-8'>
               <h3>{post? "Edit the Post": "Create the Post"}</h3>
               <Save_Button />
             </div>
-          <input hidden name='content' value={content} readOnly={true}/>
+          <textarea hidden name='content' value={value} readOnly={true}/>
           <input hidden name='createdAt' value={post?post.createdAt:''} readOnly={true}/>
           <input hidden name='updatedAt' value={post?post.updatedAt:''} readOnly={true}/>
           <input hidden name='id' value={post?post.id:''} readOnly={true}/>
@@ -52,17 +54,19 @@ export default function PostForm({post}: {post: Post}) {
           />
           
         </div>
-          </div>
+      </div>
        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
             Content:
-            <Editor value={content} setValue={setContent}/>
           </label>
+          <MDEditor value={value} onChange={setValue}/> 
         </div>
         <Save_Button />
         </form>
+
       </div>
+    </Suspense>
     )
 }
 
