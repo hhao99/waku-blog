@@ -3,7 +3,7 @@ import { use, Suspense } from 'react';
 import { getAllPosts } from '../lib/actions/posts.db';
 import PostList from '@/components/posts/list'
 export default async function HomePage() {
-  const { posts }= await getData();
+  const posts  = await getAllPosts()
 
   return (
     <div className="flex flex-col items-start min-h-screen w-full bg-gray-100 p-6">
@@ -14,15 +14,10 @@ export default async function HomePage() {
   );
 }
 
-const getData = async () => {
-  const data = {
-    posts: await getAllPosts(),
-  };
-  return data;
-};
+
 
 export const getConfig = async () => {
   return {
-    render: 'static',
+    render: 'dynamic',
   } as const;
 };

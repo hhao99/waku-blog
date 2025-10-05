@@ -7,7 +7,7 @@ export const Header = () => {
         <Link to="/">Waku Blog</Link>
       </h1>
       <nav className='space-x-4'>
-        <Link to="/admin" className="underline">
+        <Link to="/admin/new" className="underline">
           Admin
         </Link>
         <Link to="/about" className="underline">

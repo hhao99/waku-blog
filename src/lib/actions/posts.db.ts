@@ -11,18 +11,16 @@ export async function getAllPosts(): Promise<Post[]> {
     return await db.select().from(postsTable);
 }
 
-export async function getPostById(id: Number): Promise<Post | undefined> {
-    const post = db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);  
-    return post;
+export async function getPostById(id: Number) {
+    return await db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);  
 }
 
-export async function createPost(newPost: NewPost): Promise<Post> {
+export async function createPost(newPost: NewPost) {
     const [insertedPost] = await db.insert(postsTable).values(newPost).returning();
-    return unstable_redirect('/')
 }
 
 export async function updatePost(id: number, updatedFields: Partial<NewPost>): Promise<Post | undefined> {
-    const [updatedPost] = await db.update(postsTable).set(updatedFields).where(postsTable.id.eq(id)).returning();
+    const [updatedPost] = await db.update(postsTable).set(updatedFields).where(eq(postsTable.id,id)).returning();
     return updatedPost;
 }
 

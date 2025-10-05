@@ -8,6 +8,8 @@ import type { getConfig as File_404_getConfig } from './pages/404';
 // prettier-ignore
 import type { getConfig as File_About_getConfig } from './pages/about';
 // prettier-ignore
+import type { getConfig as File_AdminEditId_getConfig } from './pages/admin/edit/[id]';
+// prettier-ignore
 import type { getConfig as File_Index_getConfig } from './pages/index';
 // prettier-ignore
 import type { getConfig as File_PostsId_getConfig } from './pages/posts/[id]';
@@ -16,7 +18,8 @@ import type { getConfig as File_PostsId_getConfig } from './pages/posts/[id]';
 type Page =
 | ({ path: '/404' } & GetConfigResponse<typeof File_404_getConfig>)
 | ({ path: '/about' } & GetConfigResponse<typeof File_About_getConfig>)
-| { path: '/admin'; render: 'dynamic' }
+| ({ path: '/admin/edit/[id]' } & GetConfigResponse<typeof File_AdminEditId_getConfig>)
+| { path: '/admin/new'; render: 'dynamic' }
 | ({ path: '/' } & GetConfigResponse<typeof File_Index_getConfig>)
 | ({ path: '/posts/[id]' } & GetConfigResponse<typeof File_PostsId_getConfig>);
 
