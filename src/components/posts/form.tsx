@@ -56,11 +56,17 @@ export default function PostForm({post}: {post: Post}) {
         </div>
       </div>
        
-        <div className="mb-4">
+        <div className="mb-4 h-3/4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
             Content:
           </label>
-          <MDEditor value={value} onChange={setValue}/> 
+          <MDEditor 
+            value={value} 
+            onChange={setValue}
+            preview='edit'
+            minHeight={200}
+            maxHeight={400}
+            /> 
         </div>
         <Save_Button />
         </form>
