@@ -5,14 +5,37 @@ import { unstable_notFound, unstable_redirect } from 'waku/router/server';
 
 import { postsTable } from '../../data/schemas/posts';
 import type { NewPost, Post } from '../../data/schemas/posts';
+import matter from 'gray-matter';
 
 
 export async function getAllPosts(): Promise<Post[]> {
-    return await db.select().from(postsTable);
+    let posts
+    try {
+        posts = await db.select().from(postsTable)
+        if(posts.length > 0) {
+            posts = posts.map( (post: Post) =>{
+                const {data} = matter(post.content)
+                return {...post, ...data}
+            })
+        }
+        return posts;
+    } catch(err) {
+        console.log(err)
+        return [];
+    }
 }
 
-export async function getPostById(id: Number) {
-    return await db.select().from(postsTable).where(eq(postsTable.id, id)).limit(1);  
+export async function getPostById(id: Number) { 
+    let post:Post
+    try {
+        post =  (await db.select().from(postsTable).where(eq(postsTable.id, id)))[0];
+        const {data,content} = matter(post.content);
+        post = {...post, ...data, text: content}
+        return post;
+    }
+    catch(err) { console.log(err);
+        return null
+    }
 }
 
 export async function createPost(newPost: NewPost) {

@@ -3,19 +3,16 @@ import { unstable_redirect } from "waku/router/server";
 import { createPost, deletePost, updatePost } from "./posts.db";
 
 const createOrUpdatePostAction = async (preState, formData: FormData) => {
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string;
-  const content = formData.get("content");
+  const content = formData.get("content") as string;
   const id = parseInt(formData.get('id') as string);
-  const createdAt = parseInt(formData.get('createdAt') as string) || Date.now();
-  const updatedAt = Date.now()
+  const created_at = parseInt(formData.get('createdAt') as string) || Date.now();
+  const updated_at = Date.now()
   const mode = formData.get('mode') as string
-  const post = { title,  description, content, createdAt, updatedAt };
   if( mode === 'new') {
-    await createPost(post);
+    await createPost({content, created_at});
   }
   else {
-    await updatePost(id,post);
+    await updatePost(id,{content,updated_at});
   }
   return unstable_redirect('/')
 }

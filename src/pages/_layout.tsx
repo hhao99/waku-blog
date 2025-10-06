@@ -11,27 +11,21 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const data = await getData();
 
   return (
-    <html>
-      <head>
+    <div className="flex flex-col h-4/5 w-full">
       <meta charSet='utf-8' />
-      <meta name="description" content={data.description} />
       <link rel="icon" type="image/png" href={data.icon} />
 
-      </head>
-    <body className="flex flex-col h-4/5 w-full">
-      <Header />
+    <Header />
       <main className="m-6 flex z-100">
         {children}
       </main>
       <Footer />
-    </body>
-    </html>
+    </div>
   );
 }
 
 const getData = async () => {
   const data = {
-    description: 'An internet website!',
     icon: '/images/favicon.png',
   };
 

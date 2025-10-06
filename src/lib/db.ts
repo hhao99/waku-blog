@@ -1,10 +1,9 @@
-import { drizzle } from 'drizzle-orm/libsql';
-import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres'
+import { getEnv } from 'waku'
 
-const db = drizzle({
-    client: createClient({
-        url: process.env.DB_URL || 'file:./dev.db',
-    })
-});
+const connectionString = getEnv('DATABASE_URL')||'';
+const client = postgres(connectionString,{ prepare: false});
+const db = drizzle(client);
 
 export default db;

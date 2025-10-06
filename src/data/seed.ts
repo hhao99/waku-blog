@@ -1,5 +1,5 @@
 import db from '../lib/db';
-import { postsTable } from './schemas/posts';
+import { postsTable } from './schemas/posts_sqlite';
 
 const posts = [
   {

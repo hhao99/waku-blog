@@ -5,11 +5,11 @@ import type { Post } from '@/data/schemas/posts';
 import Markdown from 'react-markdown'
 const MDEditor = lazy(()=> import('@uiw/react-md-editor'))
 
-export default function PostForm({post}: {post: Post}) {
+export default function PostForm({post,mode}: {post: Post, mode: string}) {
     
 
 
-      const [value,setValue] = useState(post? post.content : "");
+      const [value,setValue] = useState(post? post.content : "---\ntitle: hello \n---\n# Hello");
       const [state, formAction, isPending] = useActionState(createOrUpdatePostAction,null);
       
     return (
@@ -21,45 +21,13 @@ export default function PostForm({post}: {post: Post}) {
               <Save_Button />
             </div>
           <textarea hidden name='content' value={value} readOnly={true}/>
-          <input hidden name='createdAt' value={post?post.createdAt:''} readOnly={true}/>
-          <input hidden name='updatedAt' value={post?post.updatedAt:''} readOnly={true}/>
+          <input hidden name='created_at' value={post?post.created_at:''} readOnly={true}/>
+          <input hidden name='updated_at' value={post?post.updated_at:''} readOnly={true}/>
           <input hidden name='id' value={post?post.id:''} readOnly={true}/>
+          <input hidden name='mode' value={mode} readOnly={true} />
 
-          <input hidden name='mode' value={post?'edit':'new'} readOnly={true}/>
-          <div className='flex justify-between space-x-2'>
-            <div className="w-1/3">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-              Title: 
-            </label>
-            <input
-              className="shadow appearance-none border-b-1 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              name="title"
-              id='title'
-              type="text"
-              placeholder="Post Title"
-              defaultValue={post? post.title: "new title"}
-            />
-            </div>
-        <div className="w-2/3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-            Description: 
-          </label>
-          <input
-            className="shadow appearance-none border-b-1 rounded w-full p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            name="description"
-            id='description'
-            defaultValue={post? post.description: 'blog description'}
-            type="text"
-            placeholder="Post Description"
-          />
-          
-        </div>
-      </div>
-       
         <div className="mb-4 h-3/4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
-            Content:
-          </label>
+          
           <MDEditor 
             value={value} 
             onChange={setValue}

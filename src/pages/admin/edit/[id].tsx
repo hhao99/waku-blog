@@ -20,7 +20,7 @@ export default async function EditPage({ id, }: PageProps<'/posts/[id]'>) {
 const getData = async (id: number) => {
     const post = await getPostById(id);
   const data = {
-    post: post[0] || null,
+    post: post || null,
   };
   return data;
 };
