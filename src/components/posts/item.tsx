@@ -7,13 +7,13 @@ export default function PostItem({post}: {post: Post}) {
     return (
         <div className='w-full mb-2 border-b-1 border-gray-200 rounded-lg shadow-lg'>
             <h3 className='text-xl text-indigo-400 text-center'>
-                <Link to={`/posts/${post.id}`}>{post.title}</Link></h3>
+                <Link to={`/posts/${post.id}`}>{post.id}</Link></h3>
             <div className='flex justify-between'>
                 <div className='text-md text-gray-600 p-2'>{post.description}</div>
                 <div><DeleteItemButton id={post.id} /></div>
             </div>
             <div className='text-right'>
-                <span className='text-sm text-gray-500 p-2'>created at: {new Date(post.createdAt).toLocaleString('en-US')}</span>
+                <span className='text-sm text-gray-500 p-2'>created at: { new Date(post.created_at).toLocaleString('en-US')}</span>
             </div>  
         </div>
     )

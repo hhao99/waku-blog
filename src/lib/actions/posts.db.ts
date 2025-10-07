@@ -11,8 +11,16 @@ import matter from 'gray-matter';
 export async function getAllPosts(): Promise<Post[]> {
     
     try {
-        const result = await db.select().from(posts)
+        const result = await db.select({
+            id: posts.id,
+            content: posts.content,
+            created_at: posts.created_at,
+            updated_at: posts.updated_at,
+            author: users.name,
+            email: users.email
+        }).from(posts)
             .leftJoin(users,eq(posts.author_id,users.id));
+        console.log(result)
         return result;
     } catch(err) {
         console.log(err)
