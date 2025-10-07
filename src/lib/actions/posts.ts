@@ -5,14 +5,23 @@ import { createPost, deletePost, updatePost } from "./posts.db";
 const createOrUpdatePostAction = async (preState, formData: FormData) => {
   const content = formData.get("content") as string;
   const id = parseInt(formData.get('id') as string);
-  const created_at = parseInt(formData.get('createdAt') as string) || Date.now();
-  const updated_at = Date.now()
+  const author_id = parseInt(formData.get('author_id') as string);
+  
   const mode = formData.get('mode') as string
+
   if( mode === 'new') {
-    await createPost({content, created_at});
+    try {
+      await createPost({content,author_id});
+    } catch(err) {
+      console.log('insert error ', err)
+    }
   }
   else {
-    await updatePost(id,{content,updated_at});
+    try {
+      await updatePost(id,{content});
+    } catch(err) {
+      console.log('update error ', err)
+    }
   }
   return unstable_redirect('/')
 }

@@ -3,22 +3,17 @@ import db from '../db';
 import { eq } from 'drizzle-orm';
 import { unstable_notFound, unstable_redirect } from 'waku/router/server';
 
-import { posts } from '../../data/schemas/posts';
-import type { NewPost, Post } from '../../data/schemas/posts';
+import { posts,users } from '@/data/schemas/posts';
+import type { NewPost, Post } from '@/data/schemas/posts';
 import matter from 'gray-matter';
 
 
 export async function getAllPosts(): Promise<Post[]> {
-    let posts
+    
     try {
-        posts = await db.select().from(posts);
-        if(posts.length > 0) {
-            posts = posts.map( (post: Post) =>{
-                const {data} = matter(post.content)
-                return {...post, ...data}
-            })
-        }
-        return posts;
+        const result = await db.select().from(posts)
+            .leftJoin(users,eq(posts.author_id,users.id));
+        return result;
     } catch(err) {
         console.log(err)
         return [];
@@ -37,14 +32,14 @@ export async function getPostById(id: Number) {
 }
 
 export async function createPost(newPost: NewPost) {
-    const [insertedPost] = await db.insert(postsTable).values(newPost).returning();
+    const [insertedPost] = await db.insert(posts).values(newPost).returning();
 }
 
 export async function updatePost(id: number, updatedFields: Partial<NewPost>): Promise<Post | undefined> {
-    const [updatedPost] = await db.update(postsTable).set(updatedFields).where(eq(postsTable.id,id)).returning();
+    const [updatedPost] = await db.update(posts).set(updatedFields).where(eq(postsTable.id,id)).returning();
     return updatedPost;
 }
 
 export async function deletePost(id: number): Promise<void> {
-    await db.delete(postsTable).where(eq(postsTable.id,id));
+    await db.delete(posts).where(eq(posts.id,id));
 }       

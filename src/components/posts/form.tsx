@@ -24,6 +24,8 @@ export default function PostForm({post,mode}: {post: Post, mode: string}) {
           <input hidden name='created_at' value={post?post.created_at:''} readOnly={true}/>
           <input hidden name='updated_at' value={post?post.updated_at:''} readOnly={true}/>
           <input hidden name='id' value={post?post.id:''} readOnly={true}/>
+
+          <input hidden name='author_id' value={'1'} readOnly={true}/>
           <input hidden name='mode' value={mode} readOnly={true} />
 
         <div className="mb-4 h-3/4">

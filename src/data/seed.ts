@@ -1,6 +1,6 @@
 
-import * as schema from './schemas/posts_sqlite';
-import {users, posts} from './schemas/posts_sqlite';
+import * as schema from './schemas/posts';
+import {users, posts} from './schemas/posts';
 import { eq, sql } from 'drizzle-orm';
 
 import { drizzle } from 'drizzle-orm/libsql';
