@@ -8,7 +8,9 @@
     "build": "waku build",
     "start": "waku start",
     "drizzle": "drizzle-kit",
-    "seed": "tsx ./src/data/seed.ts"
+    "seed": "tsx ./src/data/seed.ts",
+    "push": "pnpm drizzle-kit generate && pnpm drizzle-kit push"
+
   },
   "dependencies": {
     "@libsql/client": "^0.15.15",

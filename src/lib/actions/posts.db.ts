@@ -1,9 +1,9 @@
 'use server';
 import db from '../db';
-import { eq,desc} from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { unstable_notFound, unstable_redirect } from 'waku/router/server';
 
-import { postsTable } from '../../data/schemas/posts';
+import { posts } from '../../data/schemas/posts';
 import type { NewPost, Post } from '../../data/schemas/posts';
 import matter from 'gray-matter';
 
@@ -11,7 +11,7 @@ import matter from 'gray-matter';
 export async function getAllPosts(): Promise<Post[]> {
     let posts
     try {
-        posts = await db.select().from(postsTable)
+        posts = await db.select().from(posts);
         if(posts.length > 0) {
             posts = posts.map( (post: Post) =>{
                 const {data} = matter(post.content)
@@ -26,12 +26,10 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 export async function getPostById(id: Number) { 
-    let post:Post
     try {
-        post =  (await db.select().from(postsTable).where(eq(postsTable.id, id)))[0];
+        const [post] =  (await db.select().from(posts).where(eq(posts.id, id)));
         const {data,content} = matter(post.content);
-        post = {...post, ...data, text: content}
-        return post;
+        return {...post, ...data, text: content}
     }
     catch(err) { console.log(err);
         return null
