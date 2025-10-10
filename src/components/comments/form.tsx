@@ -6,9 +6,7 @@ import Markdown from 'react-markdown'
 const MDEditor = lazy(()=> import('@uiw/react-md-editor'))
 
 export default function PostForm({post,mode}: {post: Post, mode: string}) {
-    
-
-
+ 
       const [value,setValue] = useState(post? post.content : "---\ntitle: hello \n---\n# Hello");
       const [state, formAction, isPending] = useActionState(createOrUpdatePostAction,null);
       

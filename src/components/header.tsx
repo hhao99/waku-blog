@@ -1,9 +1,14 @@
 'use client';
+import { useEffect } from 'react';
 import { Link } from 'waku';
 import { useStore } from 'zustand';
 import { useUserStore } from '@/store/users';
 export const Header = () => {
-  const { isLoggedIn,user } = useUserStore( (state) => state )
+  const { isLoggedIn,user, initializeLoginStatus} = useUserStore( (state) => state )
+
+  useEffect(()=> {
+    initializeLoginStatus();
+  },[])
   return (
     <header className="flex w-full justify-between gap-4 m-2 ">
       <h1 className="text-xl font-bold tracking-tight">
