@@ -16,12 +16,9 @@ export default function LoginPage({id}: {id: number}) {
         console.log(`user ${user.name} is validated`)
         if(user) {
             login(user,user.token);
-            console.log(`${user.name} logged in.`)
         }
     }
-
-    const [state,formAction,isPending] = useActionState(handleLoginAction,null)
-    
+    const [state,formAction,isPending] = useActionState(handleLoginAction,null)    
     return (
         <div className='w-full m-2 border-b-1 border-gray-200 rounded-lg shadow-lg'>
             <form action={formAction}>

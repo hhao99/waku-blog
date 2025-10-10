@@ -8,6 +8,7 @@ export const Header = () => {
 
   useEffect(()=> {
     initializeLoginStatus();
+    
   },[])
   return (
     <header className="flex w-full justify-between gap-4 m-2 ">

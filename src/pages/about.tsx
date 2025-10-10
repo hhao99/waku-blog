@@ -21,7 +21,6 @@ const getData = async () => {
     headline: 'About Waku Blog',
     body: 'The minimal blog system based on Waku and React19',
   };
-
   return data;
 };
 

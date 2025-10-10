@@ -1,7 +1,23 @@
 
+'use client'
+import { useEffect } from 'react';
+
+import { useRouter } from 'waku';
+import { useUserStore } from '@/store/users';
 import PostForm from '@/components/posts/form';
-import { getPostById } from '@/lib/actions/posts.db';
-export default async function NewPostPage() {
+
+export default function NewPostPage() {
+  const { loginStatus } = useUserStore( state=> state)
+  const router = useRouter();
+
+  useEffect( ()=> {
+    if(!loginStatus.isLoggedIn) {
+    console.log('Not Login')
+    router.push('/auth/login');
+  }
+  },[])
+
+  
 
   return (
     <div className="h-screen w-full flex flex-col items-start bg-gray-100 p-6">
