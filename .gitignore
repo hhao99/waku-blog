@@ -1,7 +1,7 @@
 node_modules
 .direnv
 drizzle
-data
+data/dev.db
 dist
 .env*
 *.tsbuildinfo
