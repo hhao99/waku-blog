@@ -1,0 +1,11 @@
+node_modules
+.direnv
+drizzle
+data
+dist
+.env*
+*.tsbuildinfo
+.cache
+.DS_Store
+*.pem
+pnpm-lock.yaml
