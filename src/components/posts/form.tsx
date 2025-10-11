@@ -4,11 +4,14 @@ import { createOrUpdatePostAction } from "@/lib/actions/posts";
 import type { Post } from '@/data/schemas/posts';
 const MDEditor = lazy(()=> import('@uiw/react-md-editor'))
 
+import { useUserStore } from '@/store/users';
 
 export default function PostForm({post,mode}: {post: Post, mode: string}) {
       const [value,setValue] = useState(post? post.content : "---\ntitle: hello \n---\n# Hello");
+      const { loginStatus } = useUserStore( state => state);
       const [state, formAction, isPending] = useActionState(createOrUpdatePostAction,null);
-  
+
+      console.log(loginStatus)
 
     return (
       <Suspense fallback={<h3>loading form...</h3>}>
@@ -22,8 +25,8 @@ export default function PostForm({post,mode}: {post: Post, mode: string}) {
           <input hidden name='created_at' value={post?post.created_at:''} readOnly={true}/>
           <input hidden name='updated_at' value={post?post.updated_at:''} readOnly={true}/>
           <input hidden name='id' value={post?post.id:''} readOnly={true}/>
-
-          <input hidden name='author_id' value={post?post.author_id:'1'} readOnly={true}/>
+          <input hidden name='user_id' value={loginStatus?loginStatus.user.id:''} readOnly={true} />
+          <input hidden name='token' value={loginStatus?loginStatus.token:''} readOnly={true} />
           <input hidden name='mode' value={mode} readOnly={true} />
 
         <div className="mb-4 h-3/4">

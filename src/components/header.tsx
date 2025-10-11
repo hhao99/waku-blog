@@ -4,11 +4,10 @@ import { Link } from 'waku';
 import { useStore } from 'zustand';
 import { useUserStore } from '@/store/users';
 export const Header = () => {
-  const { isLoggedIn,user, initializeLoginStatus} = useUserStore( (state) => state )
+  const { isLoggedIn,loginStatus, initializeLoginStatus} = useUserStore( (state) => state )
 
   useEffect(()=> {
     initializeLoginStatus();
-    
   },[])
   return (
     <header className="flex w-full justify-between gap-4 m-2 ">
@@ -16,7 +15,7 @@ export const Header = () => {
         <Link to="/">Waku Blog</Link>
       </h1>
       <div>
-        {isLoggedIn? `welcome ${user.name}`: ''}
+        {isLoggedIn? `welcome ${loginStatus.user.name}`: ''}
       </div>
       <nav className='mx-8 space-x-4'>
         { isLoggedIn? 

@@ -7,14 +7,16 @@ import { useUserStore } from '@/store/users';
 import PostForm from '@/components/posts/form';
 
 export default function NewPostPage() {
-  const { loginStatus } = useUserStore( state=> state)
+  const { loginStatus, initializeLoginStatus } = useUserStore( state=> state)
   const router = useRouter();
 
+  console.log(loginStatus)
   useEffect( ()=> {
+    initializeLoginStatus();
     if(!loginStatus.isLoggedIn) {
-    console.log('Not Login')
-    router.push('/auth/login');
-  }
+      console.log('Not Login')
+      router.push('/auth/login');
+    }
   },[])
 
   

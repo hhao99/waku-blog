@@ -5,13 +5,15 @@ import { createPost, deletePost, updatePost } from "../services/db/posts";
 const createOrUpdatePostAction = async (preState, formData: FormData) => {
   const content = formData.get("content") as string;
   const id = parseInt(formData.get('id') as string);
-  const author_id = parseInt(formData.get('author_id') as string);
-  
-  const mode = formData.get('mode') as string
+
+  const user_id = parseInt(formData.get('user_id') as string);
+  const toke = formData.get('token') as string;
+  const mode = formData.get('mode') as string;
 
   if( mode === 'new') {
     try {
-      await createPost({content,author_id});
+      // todo: check token 
+      await createPost({content,author_id: user_id});
     } catch(err) {
       console.log('insert error ', err)
     }
